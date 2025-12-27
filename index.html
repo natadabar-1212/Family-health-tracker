@@ -539,29 +539,31 @@
       <h2>Does This Sound Useful to You?</h2>
       <p>Help us understand if we're building something you actually need.</p>
       
-      <div style="max-width: 600px; margin: 0 auto;">
+      <form id="feedbackForm" style="max-width: 600px; margin: 0 auto;">
         <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px;">
-          <button class="feedback-btn" data-feedback="yes" style="background: var(--primary); color: white; border: 3px solid var(--primary); padding: 24px 16px; border-radius: 16px; font-size: 18px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+          <button type="button" class="feedback-btn" data-feedback="yes" style="background: var(--primary); color: white; border: 3px solid var(--primary); padding: 24px 16px; border-radius: 16px; font-size: 18px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; gap: 8px;">
             <span style="font-size: 48px;">👍</span>
             <span>Yes, I need this!</span>
           </button>
-          <button class="feedback-btn" data-feedback="maybe" style="background: var(--warm); color: white; border: 3px solid var(--warm); padding: 24px 16px; border-radius: 16px; font-size: 18px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+          <button type="button" class="feedback-btn" data-feedback="maybe" style="background: var(--warm); color: white; border: 3px solid var(--warm); padding: 24px 16px; border-radius: 16px; font-size: 18px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; gap: 8px;">
             <span style="font-size: 48px;">🤷</span>
             <span>Maybe</span>
           </button>
-          <button class="feedback-btn" data-feedback="no" style="background: var(--muted); color: white; border: 3px solid var(--muted); padding: 24px 16px; border-radius: 16px; font-size: 18px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+          <button type="button" class="feedback-btn" data-feedback="no" style="background: var(--muted); color: white; border: 3px solid var(--muted); padding: 24px 16px; border-radius: 16px; font-size: 18px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; gap: 8px;">
             <span style="font-size: 48px;">👎</span>
             <span>Not for me</span>
           </button>
         </div>
         
-        <div id="feedbackForm" style="display: none;">
-          <input id="email" type="email" placeholder="Your email (optional)" style="width: 100%; padding: 16px 20px; border-radius: 12px; border: 2px solid rgba(30,41,59,.2); background: #ffffff; color: var(--text); font: inherit; margin-bottom: 14px; transition: all .2s ease;" />
-          <textarea id="comments" placeholder="Any thoughts you'd like to share? (optional)" rows="3" style="width: 100%; padding: 16px 20px; border-radius: 12px; border: 2px solid rgba(30,41,59,.2); background: #ffffff; color: var(--text); font: inherit; resize: vertical; transition: all .2s ease; margin-bottom: 14px;"></textarea>
-          <button id="submitBtn" class="btn" style="width: 100%;">Submit Feedback</button>
+        <div id="detailsSection" style="display: none; opacity: 0; transition: opacity 0.3s ease;">
+          <div id="emailSection" style="display: none; margin-bottom: 14px;">
+            <input id="email" type="email" placeholder="Your email (so we can keep you updated)" style="width: 100%; padding: 16px 20px; border-radius: 12px; border: 2px solid rgba(30,41,59,.2); background: #ffffff; color: var(--text); font: inherit; transition: all .2s ease;" />
+          </div>
+          <textarea id="comments" placeholder="Want to share more? (optional)" rows="3" style="width: 100%; padding: 16px 20px; border-radius: 12px; border: 2px solid rgba(30,41,59,.2); background: #ffffff; color: var(--text); font: inherit; resize: vertical; transition: all .2s ease; margin-bottom: 14px;"></textarea>
+          <button type="submit" id="submitBtn" class="btn" style="width: 100%;">Submit</button>
           <div id="toast" class="toast" style="margin-top: 14px;"></div>
         </div>
-      </div>
+      </form>
       
       <div class="tiny" style="margin-top: 16px;">🔒 We'll only email you about this project - no spam, ever.</div>
     </section>
@@ -570,11 +572,14 @@
   </main>
 
   <script>
-    const WEBHOOK_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
+    const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbz2CzWXrZaOSz3_-yRNoc4dY2H3mDHZ18jZgXMnWM79jKvO1LLj4s9rM-sxg2IRrm_i/exec";
     
     let selectedFeedback = null;
+    let feedbackSubmitted = false;
     const feedbackBtns = document.querySelectorAll('.feedback-btn');
-    const feedbackForm = document.getElementById('feedbackForm');
+    const feedbackFormEl = document.getElementById('feedbackForm');
+    const detailsSection = document.getElementById('detailsSection');
+    const emailSection = document.getElementById('emailSection');
     const submitBtn = document.getElementById('submitBtn');
     const toast = document.getElementById('toast');
     
@@ -583,24 +588,68 @@
       toast.className = ok ? 'toast ok' : 'toast err';
     }
     
-    // Handle feedback button clicks
+    // Handle feedback button clicks - INSTANT SAVE
     feedbackBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', async () => {
         selectedFeedback = btn.dataset.feedback;
         
         // Visual feedback
         feedbackBtns.forEach(b => b.classList.remove('selected'));
         btn.classList.add('selected');
         
-        // Show the form
-        feedbackForm.style.display = 'block';
-        feedbackForm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        // Immediately save the feedback
+        try {
+          const res = await fetch(WEBHOOK_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              feedback: selectedFeedback,
+              email: 'Not provided',
+              comments: 'No comments',
+              timestamp: new Date().toISOString()
+            })
+          });
+          
+          if (!res.ok) throw new Error("Network error");
+          
+          feedbackSubmitted = true;
+          
+          // Show thank you + optional follow-up
+          showToast("✓ Thanks for your feedback!", true);
+          
+          // Show details section with animation
+          detailsSection.style.display = 'block';
+          setTimeout(() => {
+            detailsSection.style.opacity = '1';
+          }, 10);
+          
+          // Show email field only for "yes" or "maybe"
+          if (selectedFeedback === 'yes' || selectedFeedback === 'maybe') {
+            emailSection.style.display = 'block';
+          } else {
+            emailSection.style.display = 'none';
+          }
+          
+          // Update submit button text
+          submitBtn.textContent = "Add More Details";
+          
+          // Scroll to form
+          setTimeout(() => {
+            detailsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }, 100);
+          
+        } catch(err) {
+          console.error(err);
+          showToast("Hmm, something went wrong. Please try again.", false);
+        }
       });
     });
     
-    // Handle form submission
-    submitBtn.addEventListener('click', async () => {
-      if (!selectedFeedback) {
+    // Handle optional details submission
+    feedbackFormEl.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      if (!selectedFeedback || !feedbackSubmitted) {
         showToast("Please select an option above first.", false);
         return;
       }
@@ -611,6 +660,12 @@
       // Email validation (if provided)
       if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         showToast("Please enter a valid email.", false);
+        return;
+      }
+      
+      // Only submit if they actually added something
+      if (!email && !comments) {
+        showToast("Please add your email or a comment to submit more details.", false);
         return;
       }
       
@@ -626,22 +681,27 @@
             feedback: selectedFeedback,
             email: email || 'Not provided',
             comments: comments || 'No comments',
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
+            isUpdate: true
           })
         });
         
         if (!res.ok) throw new Error("Network error");
         
-        showToast("🎉 Thank you for your feedback!", true);
+        showToast("🎉 Thank you! We'll keep you updated.", true);
         
-        // Reset form
-        document.getElementById('email').value = '';
-        document.getElementById('comments').value = '';
-        feedbackBtns.forEach(b => b.classList.remove('selected'));
-        selectedFeedback = null;
-        
+        // Reset form after 2 seconds
         setTimeout(() => {
-          feedbackForm.style.display = 'none';
+          document.getElementById('email').value = '';
+          document.getElementById('comments').value = '';
+          feedbackBtns.forEach(b => b.classList.remove('selected'));
+          selectedFeedback = null;
+          feedbackSubmitted = false;
+          detailsSection.style.opacity = '0';
+          setTimeout(() => {
+            detailsSection.style.display = 'none';
+            submitBtn.textContent = "Submit";
+          }, 300);
         }, 2000);
         
       } catch(err) {
@@ -649,7 +709,7 @@
         showToast("Hmm, something went wrong. Please try again.", false);
       } finally {
         submitBtn.disabled = false;
-        submitBtn.textContent = "Submit Feedback";
+        submitBtn.textContent = "Add More Details";
       }
     });
   </script>
