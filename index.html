@@ -321,65 +321,7 @@
       margin:0 0 32px 0; 
       font-size:18px;
     }
-    .cta-form{
-      max-width:550px; 
-      margin:0 auto; 
-      display:grid; 
-      gap:14px;
-    }
-    .cta-form-row{
-      display:grid; 
-      gap:14px; 
-      grid-template-columns:1fr 1fr;
-    }
-    @media (max-width:600px){
-      .cta-form-row{grid-template-columns:1fr}
-    }
     
-    input, button{
-      font:inherit; 
-      padding:16px 20px; 
-      border-radius:12px;
-      outline:none; 
-      width:100%;
-      font-size:16px;
-    }
-    input{
-      border:2px solid rgba(30,41,59,.2);
-      background:#ffffff; 
-      color:var(--text);
-      transition:all .2s ease;
-    }
-    input:focus, textarea:focus{
-      border-color:var(--secondary); 
-      box-shadow:0 0 0 4px rgba(236,72,153,.1);
-    }
-    .btn{
-      background:var(--secondary); 
-      border:none; 
-      cursor:pointer; 
-      font-weight:700;
-      color:#ffffff;
-      transition:all .2s ease;
-      box-shadow:0 4px 16px rgba(236,72,153,.3);
-      font-size:18px;
-    }
-    .btn:hover{
-      background:#db2777;
-      transform:translateY(-2px);
-      box-shadow:0 6px 20px rgba(236,72,153,.4);
-    }
-    .btn:active{
-      transform:translateY(0);
-    }
-    
-    .toast{
-      margin-top:14px; 
-      font-weight:600;
-      font-size:16px;
-    }
-    .ok{color:var(--primary)}
-    .err{color:#ef4444}
     .tiny{
       font-size:13px; 
       color:var(--muted);
@@ -578,80 +520,18 @@
       </div>
     </section>
 
-    <!-- CTA -->
+    <!-- CTA WITH EMBEDDED GOOGLE FORM -->
     <section class="cta-section">
       <h2>Sounds Like What You Need?</h2>
       <p>We're exploring building this for parents like you. If this sounds helpful, join our list to share what features matter most and be first in line if we launch.</p>
       
-      <form id="waitlist" class="cta-form" novalidate>
-        <div class="cta-form-row">
-          <div>
-            <input id="name" name="name" placeholder="Your name" autocomplete="name" />
-          </div>
-          <div>
-            <input id="email" name="email" type="email" placeholder="Your email" autocomplete="email" required />
-          </div>
-        </div>
-        <textarea id="comments" name="comments" placeholder="What features would be most helpful for your family? (optional)" rows="3" style="width: 100%; padding: 16px 20px; border-radius: 12px; border: 2px solid rgba(30,41,59,.2); background: #ffffff; color: var(--text); font: inherit; resize: vertical; transition: all .2s ease;"></textarea>
-        <button class="btn" id="submitBtn" type="submit">Yes, I Need This!</button>
-        <div id="toast" class="toast"></div>
-        <div class="tiny">🔒 We'll only email you about this project - no spam, ever.</div>
-      </form>
+      <div style="max-width: 640px; margin: 0 auto;">
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeOEspu0xhauZEXoUB3TFuu-y-Ltv9_nxe26GcPso9bj45A3w/viewform?embedded=true" width="100%" height="750" frameborder="0" marginheight="0" marginwidth="0" style="border: none; border-radius: 12px; background: white;">Loading…</iframe>
+      </div>
+      <div class="tiny" style="margin-top: 16px;">🔒 We'll only email you about this project - no spam, ever.</div>
     </section>
 
     <footer>© 2025 Family Health Tracker Concept · Privacy-first by design · Exploring solutions for busy families</footer>
   </main>
-
-  <script>
-    const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbzhPhspoXEjAhpbQygqSLhQbbdt7KPl1_sENc3jYkVnH7lpvkshH5oIjAPe6bg29A5n/exec";
-
-    const form = document.getElementById('waitlist');
-    const btn  = document.getElementById('submitBtn');
-    const toast= document.getElementById('toast');
-
-    function show(msg, ok=true){
-      toast.textContent = msg;
-      toast.className = ok ? 'toast ok' : 'toast err';
-    }
-
-    form.addEventListener('submit', async (e)=>{
-      e.preventDefault();
-      const name  = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const comments = document.getElementById('comments').value.trim();
-
-      if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
-        show("Please enter a valid email.", false); return;
-      }
-
-      btn.disabled = true; btn.textContent = "Joining..."; show("");
-
-      // Get source from URL parameters
-      const urlParams = new URLSearchParams(window.location.search);
-      const source = urlParams.get('source') || 'Direct';
-
-      try{
-        const res = await fetch(WEBHOOK_URL, {
-          method:"POST",
-          headers:{"Content-Type":"application/json"},
-          body:JSON.stringify({ 
-            name, 
-            email, 
-            comments, 
-            source,
-            ts: new Date().toISOString() 
-          })
-        });
-        if(!res.ok) throw new Error("Network error");
-        show("🎉 Thank you! We'll reach out soon to learn more about what would help you most.", true);
-        form.reset();
-      }catch(err){
-        console.error(err);
-        show("Hmm, something went wrong. Please try again.", false);
-      }finally{
-        btn.disabled = false; btn.textContent = "Yes, I Need This!";
-      }
-    });
-  </script>
 </body>
 </html>
