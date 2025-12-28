@@ -42,6 +42,26 @@
       position:relative;
       overflow:hidden;
     }
+    .hero::before{
+      content:'';
+      position:absolute;
+      top:-50%;
+      right:-10%;
+      width:400px;
+      height:400px;
+      background:radial-gradient(circle, rgba(236,72,153,.15), transparent);
+      border-radius:50%;
+    }
+    .hero::after{
+      content:'';
+      position:absolute;
+      bottom:-30%;
+      left:-5%;
+      width:300px;
+      height:300px;
+      background:radial-gradient(circle, rgba(16,185,129,.15), transparent);
+      border-radius:50%;
+    }
     .hero-content{position:relative; z-index:1}
     .badge{
       display:inline-flex; 
@@ -70,6 +90,16 @@
       display:inline-block;
       position:relative;
     }
+    .handwritten::after{
+      content:'';
+      position:absolute;
+      bottom:-4px;
+      left:0;
+      right:0;
+      height:3px;
+      background:var(--secondary);
+      border-radius:2px;
+    }
     .sub{
       color:var(--muted); 
       font-size:clamp(16px,2.5vw,20px);
@@ -83,6 +113,17 @@
       text-align:center; 
       margin:60px 0 36px 0;
     }
+    .use-cases-header h2{
+      font-size:36px; 
+      margin:0 0 12px 0; 
+      color:var(--text);
+      font-weight:700;
+    }
+    .use-cases-header p{
+      color:var(--muted); 
+      font-size:18px; 
+      margin:0;
+    }
     .use-cases{
       display:grid; 
       gap:24px;
@@ -93,13 +134,173 @@
     }
     .use-case{
       background:var(--card); 
+      border:2px solid transparent;
       border-radius:20px; 
       padding:28px; 
+      display:grid; 
+      gap:20px;
       transition:all .3s ease;
       box-shadow:0 4px 16px rgba(0,0,0,.06);
     }
+    .use-case:hover{
+      transform:translateY(-6px);
+      box-shadow:0 12px 32px rgba(0,0,0,.12);
+    }
+    .use-case:nth-child(1){border-color:var(--primary-light)}
+    .use-case:nth-child(1):hover{border-color:var(--primary)}
+    .use-case:nth-child(2){border-color:var(--secondary-light)}
+    .use-case:nth-child(2):hover{border-color:var(--secondary)}
+    .use-case:nth-child(3){border-color:var(--accent-light)}
+    .use-case:nth-child(3):hover{border-color:var(--accent)}
+    .use-case:nth-child(4){border-color:var(--warm-light)}
+    .use-case:nth-child(4):hover{border-color:var(--warm)}
     
-    /* CTA FORM */
+    .use-case-visual{
+      border-radius:12px; 
+      padding:12px;
+      height:320px;
+      display:flex; 
+      align-items:center; 
+      justify-content:center;
+      position:relative;
+    }
+    .use-case:nth-child(1) .use-case-visual{background:linear-gradient(135deg, var(--primary-light), #ecfdf5)}
+    .use-case:nth-child(2) .use-case-visual{background:linear-gradient(135deg, var(--secondary-light), #fdf2f8)}
+    .use-case:nth-child(3) .use-case-visual{background:linear-gradient(135deg, var(--accent-light), #f5f3ff)}
+    .use-case:nth-child(4) .use-case-visual{background:linear-gradient(135deg, var(--warm-light), #fffbeb)}
+    
+    .mock-screen{
+      background:#ffffff; 
+      border-radius:12px; 
+      padding:16px;
+      border:2px solid rgba(30,41,59,.1);
+      box-shadow:0 8px 24px rgba(0,0,0,.12); 
+      width:100%;
+      height:100%;
+      max-width:320px;
+      max-height:296px;
+      overflow:hidden;
+    }
+    .mock-header{
+      display:none;
+    }
+    .mock-screen-header{
+      font-size:11px;
+      font-weight:600;
+      color:var(--muted);
+      margin-bottom:12px;
+      text-transform:uppercase;
+      letter-spacing:0.5px;
+    }
+    
+    .mock-row{
+      background:rgba(16,185,129,.08); 
+      padding:12px; 
+      border-radius:8px;
+      margin-bottom:10px; 
+      font-size:13px; 
+      border-left:4px solid var(--primary);
+    }
+    .use-case:nth-child(2) .mock-row{
+      background:rgba(236,72,153,.08);
+      border-left-color:var(--secondary);
+    }
+    
+    .mock-insight{
+      background:rgba(139,92,246,.08); 
+      padding:12px; 
+      border-radius:8px;
+      margin-bottom:10px; 
+      font-size:13px; 
+      border-left:4px solid var(--accent);
+    }
+    .use-case:nth-child(3) .mock-insight{
+      background:rgba(139,92,246,.08);
+      border-left-color:var(--accent);
+    }
+    .use-case:nth-child(4) .mock-insight{
+      background:rgba(16,185,129,.08);
+      border-left-color:var(--primary);
+    }
+    
+    .mock-pill{
+      display:inline-block; 
+      background:rgba(30,41,59,.1);
+      padding:6px 10px; 
+      border-radius:6px; 
+      font-size:12px; 
+      margin:4px 4px 4px 0;
+      font-weight:500;
+    }
+    .use-case-icon{
+      display:none;
+    }
+    .use-case h3{
+      margin:0; 
+      font-size:20px; 
+      color:var(--text);
+      font-weight:700;
+      text-align:center;
+    }
+    .use-case p{
+      margin:0; 
+      color:var(--muted); 
+      font-size:14px; 
+      line-height:1.6;
+      text-align:center;
+    }
+    
+    /* WHY SECTION */
+    .why-section{
+      margin-top:60px; 
+      display:grid; 
+      gap:20px;
+      grid-template-columns:1fr;
+    }
+    @media (min-width:600px){
+      .why-section{grid-template-columns:repeat(2,1fr)}
+    }
+    .why-card{
+      background:var(--card); 
+      border:2px solid transparent;
+      border-radius:16px; 
+      padding:28px;
+      box-shadow:0 4px 16px rgba(0,0,0,.06);
+      transition:all .3s ease;
+    }
+    .why-card:hover{
+      box-shadow:0 8px 24px rgba(0,0,0,.1);
+      transform:translateY(-3px);
+    }
+    .why-card:nth-child(1){border-color:var(--accent-light)}
+    .why-card:nth-child(1):hover{border-color:var(--accent)}
+    .why-card:nth-child(2){border-color:var(--primary-light)}
+    .why-card:nth-child(2):hover{border-color:var(--primary)}
+    .why-card:nth-child(3){border-color:var(--secondary-light)}
+    .why-card:nth-child(3):hover{border-color:var(--secondary)}
+    .why-card:nth-child(4){border-color:var(--warm-light)}
+    .why-card:nth-child(4):hover{border-color:var(--warm)}
+    
+    .why-card h3{
+      margin:0 0 16px 0; 
+      font-size:22px; 
+      display:flex; 
+      align-items:center; 
+      gap:12px; 
+      color:var(--text);
+      font-weight:700;
+    }
+    .why-card ul{
+      margin:8px 0 0 0; 
+      padding-left:22px; 
+      color:var(--muted); 
+      font-size:15px; 
+      line-height:1.8;
+    }
+    .why-card li{margin:10px 0}
+    .why-card li::marker{color:var(--primary)}
+    
+    /* CTA */
     .cta-section{
       margin-top:60px; 
       background:linear-gradient(135deg, var(--secondary-light), var(--accent-light));
@@ -107,13 +308,42 @@
       border-radius:24px; 
       padding:50px 32px;
       text-align:center;
+      box-shadow:0 8px 32px rgba(236,72,153,.2);
+    }
+    .cta-section h2{
+      font-size:36px; 
+      margin:0 0 12px 0;
+      font-weight:700;
+      color:var(--text);
+    }
+    .cta-section p{
+      color:var(--muted); 
+      margin:0 0 32px 0; 
+      font-size:18px;
     }
     
-    .feedback-btn:hover { transform: translateY(-4px); }
+    .tiny{
+      font-size:13px; 
+      color:var(--muted);
+      margin-top:8px;
+    }
+    
+    .toast{
+      margin-top:14px; 
+      font-weight:600;
+      font-size:16px;
+    }
+    .ok{color:var(--primary)}
+    .err{color:#ef4444}
+    
+    .feedback-btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.2);
+    }
+    
     .feedback-btn.selected {
       transform: scale(1.05);
-      border-color: #000 !important;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      box-shadow: 0 8px 32px rgba(0,0,0,.3);
     }
     
     .btn{
@@ -122,18 +352,28 @@
       cursor:pointer; 
       font-weight:700;
       color:#ffffff;
+      transition:all .2s ease;
+      box-shadow:0 4px 16px rgba(236,72,153,.3);
+      font-size:18px;
       padding:16px 20px;
       border-radius:12px;
-      font-size:18px;
-      width: 100%;
     }
-    .btn:disabled { background: #ccc; cursor: not-allowed; }
+    .btn:hover{
+      background:#db2777;
+      transform:translateY(-2px);
+      box-shadow:0 6px 20px rgba(236,72,153,.4);
+    }
+    .btn:active{
+      transform:translateY(0);
+    }
     
-    .toast{ margin-top:14px; font-weight:600; }
-    .ok{color:var(--primary)}
-    .err{color:#ef4444}
-    
-    footer{ margin-top:50px; color:var(--muted); text-align:center; padding:20px; }
+    footer{
+      margin-top:50px; 
+      color:var(--muted); 
+      font-size:14px; 
+      text-align:center;
+      padding:20px;
+    }
   </style>
 </head>
 <body>
@@ -142,7 +382,173 @@
       <div class="hero-content">
         <span class="badge">🌟 Help Us Build This Right</span>
         <h1>Finally, <span class="handwritten">health insights</span> that actually help your family.</h1>
-        <p class="sub">Stop digging through texts and emails. Get everything organized in one place.</p>
+        <p class="sub">Stop digging through texts and emails. Get smart insights about your family's health patterns, suggested questions for doctors, and everything organized in one place.</p>
+      </div>
+    </section>
+
+    <div class="use-cases-header">
+      <h2>Smart Insights That Make You Look Like a Pro</h2>
+      <p>Beyond storage - actual intelligence about your family's health</p>
+    </div>
+    
+    <section class="use-cases">
+      <div class="use-case">
+        <div class="use-case-visual">
+          <div class="mock-screen">
+            <div class="mock-screen-header">Health Insights</div>
+            <div class="mock-insight">
+              <strong style="color:var(--primary)">✓ Emma's Growth</strong>
+              <div style="margin-top:8px; font-size:12px; opacity:.9">
+                Height: 48" (60th percentile)<br>
+                Weight: 52 lbs (55th percentile)<br>
+                📈 Trending healthy
+              </div>
+            </div>
+            <div class="mock-insight" style="opacity:.85">
+              <strong style="color:var(--primary)">💡 Suggestion for Next Visit</strong>
+              <div style="margin-top:8px; font-size:12px; opacity:.9">
+                Ask about:<br>
+                • Sleep patterns (waking 2x/night)<br>
+                • Appetite changes last month<br>
+                • Screen time recommendations
+              </div>
+            </div>
+            <div class="mock-insight" style="opacity:.7">
+              <strong style="color:var(--primary)">📊 Pattern Detected</strong>
+              <div style="margin-top:8px; font-size:12px; opacity:.9">
+                Max: 3 ear infections in 6 months<br>
+                → Consider ENT referral
+              </div>
+            </div>
+          </div>
+        </div>
+        <h3>Never Walk Into an Appointment Unprepared</h3>
+        <p>Spot patterns, get growth insights, and know exactly what to ask the doctor.</p>
+      </div>
+
+      <div class="use-case">
+        <div class="use-case-visual">
+          <div class="mock-screen">
+            <div class="mock-screen-header">Medical Records</div>
+            <div class="mock-row">
+              <strong style="color:var(--text)">Emma (Age 7)</strong>
+              <div style="margin-top:8px; font-size:12px; opacity:.85">
+                Last Vaccine: MMR Booster<br>
+                Date: Sept 15, 2024<br>
+                Next Due: Flu shot (Nov 2025)
+              </div>
+            </div>
+            <div class="mock-row" style="opacity:.8">
+              <strong style="color:var(--text)">Medical History</strong>
+              <div style="margin-top:6px; font-size:12px">
+                Annual checkup: Sept 2024<br>
+                Well visit: March 2024<br>
+                Sports physical: Aug 2024
+              </div>
+            </div>
+          </div>
+        </div>
+        <h3>Doctor Visit? No Stress.</h3>
+        <p>Pull up complete medical history instantly.</p>
+      </div>
+
+      <div class="use-case">
+        <div class="use-case-visual">
+          <div class="mock-screen">
+            <div class="mock-screen-header">Upcoming Appointments</div>
+            <div class="mock-insight">
+              <strong style="color:var(--accent)">📅 Mon, Oct 14</strong>
+              <div style="margin-top:8px; font-size:12px; opacity:.9">
+                Emma - Annual Checkup<br>
+                Dr. Sarah Chen • 3:00 PM
+              </div>
+            </div>
+            <div class="mock-insight" style="opacity:.85">
+              <strong style="color:var(--accent)">📅 Thu, Oct 17</strong>
+              <div style="margin-top:8px; font-size:12px; opacity:.9">
+                Max - Prescription Refill<br>
+                Walgreens Pharmacy • Pick up
+              </div>
+            </div>
+            <div class="mock-insight" style="opacity:.7">
+              <strong style="color:var(--accent)">📅 Fri, Oct 18</strong>
+              <div style="margin-top:8px; font-size:12px; opacity:.9">
+                Dad - Dentist Cleaning<br>
+                Summit Dental • 9:00 AM
+              </div>
+            </div>
+          </div>
+        </div>
+        <h3>Double-Booked Again? Not Anymore.</h3>
+        <p>See all family appointments in one calendar.</p>
+      </div>
+
+      <div class="use-case">
+        <div class="use-case-visual">
+          <div class="mock-screen">
+            <div class="mock-screen-header">Supplements & Medications</div>
+            <div class="mock-row">
+              <strong style="color:var(--text)">Daily Supplements</strong>
+              <div style="margin-top:8px; font-size:12px">
+                💊 Dad: Vitamin D, Fish Oil<br>
+                💊 Mom: Prenatal, Iron<br>
+                💊 Emma: Multivitamin<br>
+                💊 Max: Vitamin C
+              </div>
+            </div>
+            <div class="mock-row" style="opacity:.8">
+              <strong style="color:var(--text)">Prescriptions</strong>
+              <div style="margin-top:6px; font-size:12px">
+                ⏰ 2 refills due this month →
+              </div>
+            </div>
+          </div>
+        </div>
+        <h3>Forgot Who Takes What? Never Again.</h3>
+        <p>Track medications and get refill reminders.</p>
+      </div>
+    </section>
+
+    <div class="use-cases-header">
+      <h2>What We Believe Matters Most</h2>
+      <p>The principles that would guide everything we build</p>
+    </div>
+    
+    <section class="why-section">
+      <div class="why-card">
+        <h3>🔒 Your Privacy Matters</h3>
+        <ul>
+          <li>Bank-level encryption for all records</li>
+          <li>We never sell your information</li>
+          <li>You control your family's data</li>
+        </ul>
+      </div>
+      
+      <div class="why-card">
+        <h3>⚡ Built for Real Life</h3>
+        <ul>
+          <li>Works on phone, tablet, or computer</li>
+          <li>Snap photos of documents in seconds</li>
+          <li>No technical skills required</li>
+        </ul>
+      </div>
+      
+      <div class="why-card">
+        <h3>👨‍👩‍👧‍👦 Whole Family, One Place</h3>
+        <ul>
+          <li>From newborns to grandparents</li>
+          <li>Share with co-parents or caregivers</li>
+          <li>Export records anytime</li>
+        </ul>
+      </div>
+      
+      <div class="why-card">
+        <h3>💝 Actually Helpful</h3>
+        <ul>
+          <li>Health timeline for each person</li>
+          <li>Growth tracking with insights</li>
+          <li>Export PDFs for forms</li>
+        </ul>
       </div>
     </section>
 
@@ -152,34 +558,35 @@
       
       <div style="max-width: 600px; margin: 0 auto;">
         <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px;">
-          <button class="feedback-btn" data-feedback="yes" style="background: var(--primary); color: white; border: 3px solid var(--primary); padding: 24px 16px; border-radius: 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+          <button class="feedback-btn" data-feedback="yes" style="background: var(--primary); color: white; border: 3px solid var(--primary); padding: 24px 16px; border-radius: 16px; font-size: 18px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; gap: 8px;">
             <span style="font-size: 48px;">👍</span>
             <span>Yes, I need this!</span>
           </button>
-          <button class="feedback-btn" data-feedback="maybe" style="background: var(--warm); color: white; border: 3px solid var(--warm); padding: 24px 16px; border-radius: 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+          <button class="feedback-btn" data-feedback="maybe" style="background: var(--warm); color: white; border: 3px solid var(--warm); padding: 24px 16px; border-radius: 16px; font-size: 18px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; gap: 8px;">
             <span style="font-size: 48px;">🤷</span>
             <span>Maybe</span>
           </button>
-          <button class="feedback-btn" data-feedback="no" style="background: var(--muted); color: white; border: 3px solid var(--muted); padding: 24px 16px; border-radius: 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+          <button class="feedback-btn" data-feedback="no" style="background: var(--muted); color: white; border: 3px solid var(--muted); padding: 24px 16px; border-radius: 16px; font-size: 18px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; gap: 8px;">
             <span style="font-size: 48px;">👎</span>
             <span>Not for me</span>
           </button>
         </div>
         
         <div id="feedbackForm" style="display: none;">
-          <input id="email" type="email" placeholder="Your email (optional)" style="width: 100%; padding: 16px 20px; border-radius: 12px; border: 2px solid rgba(30,41,59,.2); margin-bottom: 14px;" />
-          <textarea id="comments" placeholder="Any thoughts you'd like to share? (optional)" rows="3" style="width: 100%; padding: 16px 20px; border-radius: 12px; border: 2px solid rgba(30,41,59,.2); margin-bottom: 14px;"></textarea>
-          <button id="submitBtn" class="btn">Submit Feedback</button>
-          <div id="toast" class="toast"></div>
+          <input id="email" type="email" placeholder="Your email (optional)" style="width: 100%; padding: 16px 20px; border-radius: 12px; border: 2px solid rgba(30,41,59,.2); background: #ffffff; color: var(--text); font: inherit; margin-bottom: 14px; transition: all .2s ease;" />
+          <textarea id="comments" placeholder="Any thoughts you'd like to share? (optional)" rows="3" style="width: 100%; padding: 16px 20px; border-radius: 12px; border: 2px solid rgba(30,41,59,.2); background: #ffffff; color: var(--text); font: inherit; resize: vertical; transition: all .2s ease; margin-bottom: 14px;"></textarea>
+          <button id="submitBtn" class="btn" style="width: 100%;">Submit Feedback</button>
+          <div id="toast" class="toast" style="margin-top: 14px;"></div>
         </div>
       </div>
+      
+      <div class="tiny" style="margin-top: 16px;">🔒 We'll only email you about this project - no spam, ever.</div>
     </section>
 
-    <footer>© 2025 Family Health Tracker Concept</footer>
+    <footer>© 2025 Family Health Tracker Concept · Privacy-first by design · Exploring solutions for busy families</footer>
   </main>
 
   <script>
-    // Updated with your NEW Web App URL
     const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbz5vqel1lxCGxjHDyW2XJfbHAHqLU-Q-JjXrUGulgoK1f86ERIhzw2An-3z7mY799dJ/exec";
     
     let selectedFeedback = null;
@@ -188,14 +595,79 @@
     const submitBtn = document.getElementById('submitBtn');
     const toast = document.getElementById('toast');
     
+    function showToast(msg, ok=true){
+      toast.textContent = msg;
+      toast.className = ok ? 'toast ok' : 'toast err';
+    }
+    
+    // Handle feedback button clicks
     feedbackBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         selectedFeedback = btn.dataset.feedback;
         feedbackBtns.forEach(b => b.classList.remove('selected'));
         btn.classList.add('selected');
         feedbackForm.style.display = 'block';
+        feedbackForm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       });
     });
     
+    // Handle form submission
     submitBtn.addEventListener('click', async () => {
-      if
+      if (!selectedFeedback) {
+        showToast("Please select an option above first.", false);
+        return;
+      }
+      
+      const email = document.getElementById('email').value.trim();
+      const comments = document.getElementById('comments').value.trim();
+      
+      // Email validation
+      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showToast("Please enter a valid email.", false);
+        return;
+      }
+      
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending...";
+      showToast("");
+      
+      try {
+        // Mode 'no-cors' and Content-Type 'text/plain' are required for Google Apps Script
+        await fetch(WEBHOOK_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { 
+            "Content-Type": "text/plain;charset=utf-8" 
+          },
+          body: JSON.stringify({
+            feedback: selectedFeedback,
+            email: email || 'Not provided',
+            comments: comments || 'No comments',
+            timestamp: new Date().toISOString()
+          })
+        });
+        
+        // Because of no-cors, we assume success if no error is thrown
+        showToast("🎉 Thank you for your feedback!", true);
+        
+        // Reset form
+        document.getElementById('email').value = '';
+        document.getElementById('comments').value = '';
+        feedbackBtns.forEach(b => b.classList.remove('selected'));
+        selectedFeedback = null;
+        
+        setTimeout(() => {
+          feedbackForm.style.display = 'none';
+        }, 3000);
+        
+      } catch(err) {
+        console.error(err);
+        showToast("Hmm, something went wrong. Please try again.", false);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Submit Feedback";
+      }
+    });
+  </script>
+</body>
+</html>
