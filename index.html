@@ -749,21 +749,11 @@
             surveyWrap.style.display = 'none';
             successMessage.style.display = 'block';
             stickyFeedback.classList.add('hidden');
+        } else {
+            // SHOW STICKY BAR IMMEDIATELY
+            stickyFeedback.classList.add('show');
         }
     };
-
-    // SHOW STICKY BAR AFTER SCROLLING PAST HERO
-    window.addEventListener('scroll', () => {
-        if (localStorage.getItem('formSubmitted_HealthTracker') === 'true') {
-            return;
-        }
-        const heroHeight = document.querySelector('.hero').offsetHeight + 100;
-        if (window.scrollY > heroHeight) {
-            stickyFeedback.classList.add('show');
-        } else {
-            stickyFeedback.classList.remove('show');
-        }
-    });
 
     // HANDLE STICKY BAR CLICKS
     function handleStickyFeedback(feedback) {
