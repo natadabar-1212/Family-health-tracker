@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Family Health Tracker — Finally, Peace of Mind</title>
+  <title>Family Health Tracker — Take Control of Your Family's Medical Chaos</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
   <style>
     :root{
@@ -19,6 +19,8 @@
       --accent-light:#ede9fe;
       --warm:#f59e0b;
       --warm-light:#fef3c7;
+      --danger:#ef4444;
+      --danger-light:#fee2e2;
     }
     *{box-sizing:border-box}
     body{
@@ -108,31 +110,31 @@
       line-height:1.7;
     }
     
-    /* USE CASES */
-    .use-cases-header{
+    /* SOLUTION SECTION */
+    .solution-header{
       text-align:center; 
       margin:60px 0 36px 0;
     }
-    .use-cases-header h2{
+    .solution-header h2{
       font-size:36px; 
       margin:0 0 12px 0; 
       color:var(--text);
       font-weight:700;
     }
-    .use-cases-header p{
+    .solution-header p{
       color:var(--muted); 
       font-size:18px; 
       margin:0;
     }
-    .use-cases{
+    .solutions{
       display:grid; 
       gap:24px;
       grid-template-columns:1fr;
     }
     @media (min-width:600px){
-      .use-cases{grid-template-columns:repeat(2,1fr)}
+      .solutions{grid-template-columns:repeat(2,1fr)}
     }
-    .use-case{
+    .solution{
       background:var(--card); 
       border:2px solid transparent;
       border-radius:20px; 
@@ -142,20 +144,20 @@
       transition:all .3s ease;
       box-shadow:0 4px 16px rgba(0,0,0,.06);
     }
-    .use-case:hover{
+    .solution:hover{
       transform:translateY(-6px);
       box-shadow:0 12px 32px rgba(0,0,0,.12);
     }
-    .use-case:nth-child(1){border-color:var(--primary-light)}
-    .use-case:nth-child(1):hover{border-color:var(--primary)}
-    .use-case:nth-child(2){border-color:var(--secondary-light)}
-    .use-case:nth-child(2):hover{border-color:var(--secondary)}
-    .use-case:nth-child(3){border-color:var(--accent-light)}
-    .use-case:nth-child(3):hover{border-color:var(--accent)}
-    .use-case:nth-child(4){border-color:var(--warm-light)}
-    .use-case:nth-child(4):hover{border-color:var(--warm)}
+    .solution:nth-child(1){border-color:var(--primary-light)}
+    .solution:nth-child(1):hover{border-color:var(--primary)}
+    .solution:nth-child(2){border-color:var(--secondary-light)}
+    .solution:nth-child(2):hover{border-color:var(--secondary)}
+    .solution:nth-child(3){border-color:var(--accent-light)}
+    .solution:nth-child(3):hover{border-color:var(--accent)}
+    .solution:nth-child(4){border-color:var(--warm-light)}
+    .solution:nth-child(4):hover{border-color:var(--warm)}
     
-    .use-case-visual{
+    .solution-visual{
       border-radius:12px; 
       padding:12px;
       height:320px;
@@ -164,10 +166,10 @@
       justify-content:center;
       position:relative;
     }
-    .use-case:nth-child(1) .use-case-visual{background:linear-gradient(135deg, var(--primary-light), #ecfdf5)}
-    .use-case:nth-child(2) .use-case-visual{background:linear-gradient(135deg, var(--secondary-light), #fdf2f8)}
-    .use-case:nth-child(3) .use-case-visual{background:linear-gradient(135deg, var(--accent-light), #f5f3ff)}
-    .use-case:nth-child(4) .use-case-visual{background:linear-gradient(135deg, var(--warm-light), #fffbeb)}
+    .solution:nth-child(1) .solution-visual{background:linear-gradient(135deg, var(--primary-light), #ecfdf5)}
+    .solution:nth-child(2) .solution-visual{background:linear-gradient(135deg, var(--secondary-light), #fdf2f8)}
+    .solution:nth-child(3) .solution-visual{background:linear-gradient(135deg, var(--accent-light), #f5f3ff)}
+    .solution:nth-child(4) .solution-visual{background:linear-gradient(135deg, var(--warm-light), #fffbeb)}
     
     .mock-screen{
       background:#ffffff; 
@@ -180,9 +182,6 @@
       max-width:320px;
       max-height:296px;
       overflow:hidden;
-    }
-    .mock-header{
-      display:none;
     }
     .mock-screen-header{
       font-size:11px;
@@ -201,7 +200,7 @@
       font-size:13px; 
       border-left:4px solid var(--primary);
     }
-    .use-case:nth-child(2) .mock-row{
+    .solution:nth-child(2) .mock-row{
       background:rgba(236,72,153,.08);
       border-left-color:var(--secondary);
     }
@@ -214,35 +213,23 @@
       font-size:13px; 
       border-left:4px solid var(--accent);
     }
-    .use-case:nth-child(3) .mock-insight{
+    .solution:nth-child(3) .mock-insight{
       background:rgba(139,92,246,.08);
       border-left-color:var(--accent);
     }
-    .use-case:nth-child(4) .mock-insight{
+    .solution:nth-child(4) .mock-insight{
       background:rgba(16,185,129,.08);
       border-left-color:var(--primary);
     }
     
-    .mock-pill{
-      display:inline-block; 
-      background:rgba(30,41,59,.1);
-      padding:6px 10px; 
-      border-radius:6px; 
-      font-size:12px; 
-      margin:4px 4px 4px 0;
-      font-weight:500;
-    }
-    .use-case-icon{
-      display:none;
-    }
-    .use-case h3{
+    .solution h3{
       margin:0; 
       font-size:20px; 
       color:var(--text);
       font-weight:700;
       text-align:center;
     }
-    .use-case p{
+    .solution p{
       margin:0; 
       color:var(--muted); 
       font-size:14px; 
@@ -250,55 +237,39 @@
       text-align:center;
     }
     
-    /* WHY SECTION */
-    .why-section{
-      margin-top:60px; 
-      display:grid; 
-      gap:20px;
-      grid-template-columns:1fr;
+    /* TRUST SECTION */
+    .trust-section{
+      margin-top:60px;
+      padding:40px 20px;
     }
-    @media (min-width:600px){
-      .why-section{grid-template-columns:repeat(2,1fr)}
+    .trust-header{
+      text-align:center;
+      margin-bottom:20px;
     }
-    .why-card{
-      background:var(--card); 
-      border:2px solid transparent;
-      border-radius:16px; 
-      padding:28px;
-      box-shadow:0 4px 16px rgba(0,0,0,.06);
-      transition:all .3s ease;
-    }
-    .why-card:hover{
-      box-shadow:0 8px 24px rgba(0,0,0,.1);
-      transform:translateY(-3px);
-    }
-    .why-card:nth-child(1){border-color:var(--accent-light)}
-    .why-card:nth-child(1):hover{border-color:var(--accent)}
-    .why-card:nth-child(2){border-color:var(--primary-light)}
-    .why-card:nth-child(2):hover{border-color:var(--primary)}
-    .why-card:nth-child(3){border-color:var(--secondary-light)}
-    .why-card:nth-child(3):hover{border-color:var(--secondary)}
-    .why-card:nth-child(4){border-color:var(--warm-light)}
-    .why-card:nth-child(4):hover{border-color:var(--warm)}
-    
-    .why-card h3{
-      margin:0 0 16px 0; 
-      font-size:22px; 
-      display:flex; 
-      align-items:center; 
-      gap:12px; 
+    .trust-header h2{
+      font-size:36px;
+      margin:0 0 12px 0;
       color:var(--text);
       font-weight:700;
     }
-    .why-card ul{
-      margin:8px 0 0 0; 
-      padding-left:22px; 
-      color:var(--muted); 
-      font-size:15px; 
-      line-height:1.8;
+    .trust-header p{
+      color:var(--muted);
+      font-size:18px;
+      margin:0;
     }
-    .why-card li{margin:10px 0}
-    .why-card li::marker{color:var(--primary)}
+    
+    /* EVERYONE SECTION */
+    .everyone-section{
+      margin:60px 0;
+      padding:40px 20px;
+      text-align:center;
+    }
+    .everyone-section h2{
+      font-size:36px;
+      margin:0 0 12px 0;
+      color:var(--text);
+      font-weight:700;
+    }
     
     /* CTA */
     .cta-section{
@@ -389,191 +360,239 @@
   <main class="wrap">
     <section class="hero">
       <div class="hero-content">
-        <span class="badge">🌟 Help Us Build This Right</span>
-        <h1>Finally, <span class="handwritten">health insights</span> that actually help your family.</h1>
-        <p class="sub">Stop digging through texts and emails. Get smart insights about your family's health patterns, suggested questions for doctors, and everything organized in one place.</p>
+        <span class="badge">🏃‍♀️ For Parents Who Juggle Everything</span>
+        <h1>Stop carrying your family's entire medical history <span class="handwritten">in your head</span>.</h1>
+        <p class="sub">Vaccination records in your email. Lab results in three different portals. That allergy list in your phone notes. Insurance cards photographed somewhere. School forms in a kitchen drawer. And somehow you're still texting your partner "Do you remember when Max had his last tetanus shot?"</p>
       </div>
     </section>
 
-    <div class="use-cases-header">
-      <h2>Smart Insights That Make You Look Like a Pro</h2>
-      <p>Beyond storage - actual intelligence about your family's health</p>
+    <div class="solution-header">
+      <h2>Imagine Instead...</h2>
+      <p>One secure place for everything. Smart reminders. Instant access.</p>
     </div>
     
-    <section class="use-cases">
-      <div class="use-case">
-        <div class="use-case-visual">
+    <section class="solutions">
+      <div class="solution">
+        <div class="solution-visual">
           <div class="mock-screen">
-            <div class="mock-screen-header">Health Insights</div>
-            <div class="mock-insight">
-              <strong style="color:var(--primary)">✓ Emma's Growth</strong>
+            <div class="mock-screen-header">Emergency View</div>
+            <div class="mock-row">
+              <strong style="color:var(--danger)">⚡ Quick Access</strong>
               <div style="margin-top:8px; font-size:12px; opacity:.9">
-                Height: 48" (60th percentile)<br>
-                Weight: 52 lbs (55th percentile)<br>
-                📈 Trending healthy
+                Emma - Age 7<br>
+                Blood Type: O+<br>
+                Allergies: Penicillin<br>
+                Current Meds: Zyrtec daily
+              </div>
+            </div>
+            <div class="mock-row" style="opacity:.85">
+              <strong style="color:var(--danger)">📱 Emergency Contacts</strong>
+              <div style="margin-top:8px; font-size:12px; opacity:.9">
+                Dad: 555-0123<br>
+                Pediatrician: Dr. Chen<br>
+                Preferred Hospital: Children's
+              </div>
+            </div>
+            <div class="mock-row" style="opacity:.7">
+              <strong style="color:var(--danger)">🏥 Medical History</strong>
+              <div style="margin-top:8px; font-size:12px; opacity:.9">
+                Tonsillectomy: March 2023<br>
+                Asthma: Mild, controlled<br>
+                Last tetanus: Sept 2024
+              </div>
+            </div>
+          </div>
+        </div>
+        <h3>2 AM Emergency? You're Ready.</h3>
+        <p>Pull up everything the ER needs in 3 seconds. While other parents fumble with papers, you're calm and prepared.</p>
+      </div>
+
+      <div class="solution">
+        <div class="solution-visual">
+          <div class="mock-screen">
+            <div class="mock-screen-header">Smart Forms Assistant</div>
+            <div class="mock-insight">
+              <strong style="color:var(--secondary)">📋 Camp Form Ready</strong>
+              <div style="margin-top:8px; font-size:12px; opacity:.9">
+                All vaccination dates<br>
+                Medical history summary<br>
+                Emergency contacts<br>
+                → Export as PDF
               </div>
             </div>
             <div class="mock-insight" style="opacity:.85">
-              <strong style="color:var(--primary)">💡 Suggestion for Next Visit</strong>
+              <strong style="color:var(--secondary)">🏃 Sports Physical</strong>
               <div style="margin-top:8px; font-size:12px; opacity:.9">
-                Ask about:<br>
-                • Sleep patterns (waking 2x/night)<br>
-                • Appetite changes last month<br>
-                • Screen time recommendations
+                Last physical: Feb 2024<br>
+                Vision: 20/20<br>
+                No restrictions<br>
+                → Auto-fill form
               </div>
             </div>
             <div class="mock-insight" style="opacity:.7">
-              <strong style="color:var(--primary)">📊 Pattern Detected</strong>
+              <strong style="color:var(--secondary)">🏫 School Health Update</strong>
               <div style="margin-top:8px; font-size:12px; opacity:.9">
-                Max: 3 ear infections in 6 months<br>
-                → Consider ENT referral
+                Click to generate<br>
+                Includes all required info<br>
+                State-compliant format
               </div>
             </div>
           </div>
         </div>
-        <h3>Never Walk Into an Appointment Unprepared</h3>
-        <p>Spot patterns, get growth insights, and know exactly what to ask the doctor.</p>
+        <h3>Forms? Done in 30 Seconds.</h3>
+        <p>Auto-populate any form. Export PDFs. Email directly to school. Never write "DTaP - 2/4/2019" again.</p>
       </div>
 
-      <div class="use-case">
-        <div class="use-case-visual">
+      <div class="solution">
+        <div class="solution-visual">
           <div class="mock-screen">
-            <div class="mock-screen-header">Medical Records</div>
-            <div class="mock-row">
-              <strong style="color:var(--text)">Emma (Age 7)</strong>
-              <div style="margin-top:8px; font-size:12px; opacity:.85">
-                Last Vaccine: MMR Booster<br>
-                Date: Sept 15, 2024<br>
-                Next Due: Flu shot (Nov 2025)
-              </div>
-            </div>
-            <div class="mock-row" style="opacity:.8">
-              <strong style="color:var(--text)">Medical History</strong>
-              <div style="margin-top:6px; font-size:12px">
-                Annual checkup: Sept 2024<br>
-                Well visit: March 2024<br>
-                Sports physical: Aug 2024
-              </div>
-            </div>
-          </div>
-        </div>
-        <h3>Doctor Visit? No Stress.</h3>
-        <p>Pull up complete medical history instantly.</p>
-      </div>
-
-      <div class="use-case">
-        <div class="use-case-visual">
-          <div class="mock-screen">
-            <div class="mock-screen-header">Upcoming Appointments</div>
+            <div class="mock-screen-header">Pattern Detection</div>
             <div class="mock-insight">
-              <strong style="color:var(--accent)">📅 Mon, Oct 14</strong>
+              <strong style="color:var(--accent)">🔍 Noticed Something</strong>
               <div style="margin-top:8px; font-size:12px; opacity:.9">
-                Emma - Annual Checkup<br>
-                Dr. Sarah Chen • 3:00 PM
+                Max's headaches:<br>
+                3 times this month<br>
+                Always after soccer<br>
+                → Could be dehydration?
               </div>
             </div>
             <div class="mock-insight" style="opacity:.85">
-              <strong style="color:var(--accent)">📅 Thu, Oct 17</strong>
+              <strong style="color:var(--accent)">📊 Growth Alert</strong>
               <div style="margin-top:8px; font-size:12px; opacity:.9">
-                Max - Prescription Refill<br>
-                Walgreens Pharmacy • Pick up
+                Emma hasn't grown in 6 months<br>
+                Previously: 2 inches/year<br>
+                → Worth mentioning to doctor
               </div>
             </div>
             <div class="mock-insight" style="opacity:.7">
-              <strong style="color:var(--accent)">📅 Fri, Oct 18</strong>
+              <strong style="color:var(--accent)">💊 Medication Working?</strong>
               <div style="margin-top:8px; font-size:12px; opacity:.9">
-                Dad - Dentist Cleaning<br>
-                Summit Dental • 9:00 AM
+                Allergy symptoms logged:<br>
+                Before Zyrtec: Daily<br>
+                After: 2x per week<br>
+                → Show doctor this data
               </div>
             </div>
           </div>
         </div>
-        <h3>Double-Booked Again? Not Anymore.</h3>
-        <p>See all family appointments in one calendar.</p>
+        <h3>Be the Parent Who Catches Things Early</h3>
+        <p>AI spots patterns you might miss. Walk into appointments with actual data, not vague memories.</p>
       </div>
 
-      <div class="use-case">
-        <div class="use-case-visual">
+      <div class="solution">
+        <div class="solution-visual">
           <div class="mock-screen">
-            <div class="mock-screen-header">Supplements & Medications</div>
+            <div class="mock-screen-header">Teen Transition Mode</div>
             <div class="mock-row">
-              <strong style="color:var(--text)">Daily Supplements</strong>
+              <strong style="color:var(--text)">🎓 College Ready</strong>
               <div style="margin-top:8px; font-size:12px">
-                💊 Dad: Vitamin D, Fish Oil<br>
-                💊 Mom: Prenatal, Iron<br>
-                💊 Emma: Multivitamin<br>
-                💊 Max: Vitamin C
+                Health packet prepared<br>
+                Insurance card copy<br>
+                Local doctor options<br>
+                Prescription transfer ready
               </div>
             </div>
             <div class="mock-row" style="opacity:.8">
-              <strong style="color:var(--text)">Prescriptions</strong>
+              <strong style="color:var(--text)">👤 Access Controls</strong>
               <div style="margin-top:6px; font-size:12px">
-                ⏰ 2 refills due this month →
+                Parent: View all records<br>
+                Teen: Manage appointments<br>
+                Gradual independence<br>
+                HIPAA compliant at 18
               </div>
             </div>
           </div>
         </div>
-        <h3>Forgot Who Takes What? Never Again.</h3>
-        <p>Track medications and get refill reminders.</p>
+        <h3>Navigate the Teen Years Smoothly</h3>
+        <p>From losing portal access at 12 to college health forms at 18, handle transitions without the drama.</p>
       </div>
     </section>
 
-    <div class="use-cases-header">
-      <h2>What We Believe Matters Most</h2>
-      <p>The principles that would guide everything we build</p>
-    </div>
-    
-    <section class="why-section">
-      <div class="why-card">
-        <h3>🔒 Your Privacy Matters</h3>
-        <ul>
-          <li>Bank-level encryption for all records</li>
-          <li>We never sell your information</li>
-          <li>You control your family's data</li>
-        </ul>
+    <section class="everyone-section">
+      <h2>Your Whole Family's Health Hub</h2>
+      <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+        <p style="font-size: 18px; color: var(--muted); margin-bottom: 30px;">
+          One place for everyone you take care of - from newborns to grandparents.
+        </p>
+        <div style="display: grid; gap: 24px; grid-template-columns: 1fr; text-align: left;">
+          <div style="background: var(--card); border-left: 4px solid var(--accent); padding: 24px; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,.06);">
+            <h3 style="margin: 0 0 12px 0; font-size: 20px; color: var(--text);">
+              <span style="margin-right: 8px;">👵</span>Your Parents Too
+            </h3>
+            <p style="margin: 0; color: var(--muted); font-size: 15px;">
+              Mom's medications, Dad's specialists, their Medicare info. When you're the one taking them to appointments, you need their history at your fingertips. Store it all securely and share access with siblings.
+            </p>
+          </div>
+          <div style="background: var(--card); border-left: 4px solid var(--warm); padding: 24px; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,.06);">
+            <h3 style="margin: 0 0 12px 0; font-size: 20px; color: var(--text);">
+              <span style="margin-right: 8px;">🐕</span>Even Your Fur Babies
+            </h3>
+            <p style="margin: 0; color: var(--muted); font-size: 15px;">
+              Vaccine records for boarding. That expensive allergy medication. Which vet you saw for what. Because Fluffy's health paperwork shouldn't add to your mental load.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust-section">
+      <div class="trust-header">
+        <h2>Built by Parents, for Parents</h2>
+        <p>Created with real families in mind, every single feature</p>
       </div>
       
-      <div class="why-card">
-        <h3>⚡ Built for Real Life</h3>
-        <ul>
-          <li>Works on phone, tablet, or computer</li>
-          <li>Snap photos of documents in seconds</li>
-          <li>No technical skills required</li>
-        </ul>
-      </div>
-      
-      <div class="why-card">
-        <h3>👨‍👩‍👧‍👦 Whole Family, One Place</h3>
-        <ul>
-          <li>From newborns to grandparents</li>
-          <li>Share with co-parents or caregivers</li>
-          <li>Export records anytime</li>
-        </ul>
-      </div>
-      
-      <div class="why-card">
-        <h3>💝 Actually Helpful</h3>
-        <ul>
-          <li>Health timeline for each person</li>
-          <li>Growth tracking with insights</li>
-          <li>Export PDFs for forms</li>
-        </ul>
+      <div style="display: flex; justify-content: space-around; align-items: flex-start; flex-wrap: wrap; gap: 40px; max-width: 900px; margin: 40px auto 0;">
+        <div style="text-align: center; flex: 1; min-width: 200px;">
+          <div style="width: 80px; height: 80px; margin: 0 auto 16px; background: var(--primary-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 36px;">
+            🔒
+          </div>
+          <h3 style="margin: 0 0 8px 0; font-size: 18px; color: var(--text); font-weight: 600;">
+            Your Data, Your Control
+          </h3>
+          <p style="margin: 0; color: var(--muted); font-size: 14px; line-height: 1.5;">
+            Bank-level security.<br>You own everything.<br>Never sold. Ever.
+          </p>
+        </div>
+        
+        <div style="text-align: center; flex: 1; min-width: 200px;">
+          <div style="width: 80px; height: 80px; margin: 0 auto 16px; background: var(--accent-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 36px;">
+            ⚡
+          </div>
+          <h3 style="margin: 0 0 8px 0; font-size: 18px; color: var(--text); font-weight: 600;">
+            Made for Real Life
+          </h3>
+          <p style="margin: 0; color: var(--muted); font-size: 14px; line-height: 1.5;">
+            Upload data. Save. Done.<br>Works on any device.<br>Even offline.
+          </p>
+        </div>
+        
+        <div style="text-align: center; flex: 1; min-width: 200px;">
+          <div style="width: 80px; height: 80px; margin: 0 auto 16px; background: var(--secondary-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 36px;">
+            👨‍👩‍👧‍👦
+          </div>
+          <h3 style="margin: 0 0 8px 0; font-size: 18px; color: var(--text); font-weight: 600;">
+            Real Family Dynamics
+          </h3>
+          <p style="margin: 0; color: var(--muted); font-size: 14px; line-height: 1.5;">
+            Multiple caregivers.<br>Complex families.<br>Flexible access.
+          </p>
+        </div>
       </div>
     </section>
 
     <section class="cta-section">
       <div id="surveyWrap">
-        <h2>Does This Sound Useful to You?</h2>
-        <p>Help us understand if we're building something you actually need.</p>
+        <h2>Would This Change Your Life?</h2>
+        <p>Help us build exactly what exhausted parents actually need.</p>
         
         <div style="max-width: 600px; margin: 0 auto;">
           <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px;">
             <button class="feedback-btn" data-feedback="yes" style="background: var(--primary); color: white; border: 3px solid var(--primary); padding: 24px 16px; border-radius: 16px; font-size: 18px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; gap: 8px;">
-              <span style="font-size: 48px;">👍</span>
+              <span style="font-size: 48px;">🙌</span>
               <span>Yes, I need this!</span>
             </button>
             <button class="feedback-btn" data-feedback="maybe" style="background: var(--warm); color: white; border: 3px solid var(--warm); padding: 24px 16px; border-radius: 16px; font-size: 18px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; gap: 8px;">
-              <span style="font-size: 48px;">🤷</span>
+              <span style="font-size: 48px;">🤔</span>
               <span>Maybe</span>
             </button>
             <button class="feedback-btn" data-feedback="no" style="background: var(--muted); color: white; border: 3px solid var(--muted); padding: 24px 16px; border-radius: 16px; font-size: 18px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; gap: 8px;">
@@ -599,7 +618,7 @@
       </div>
     </section>
 
-    <footer>© 2025 Family Health Tracker Concept · Privacy-first by design · Exploring solutions for busy families</footer>
+    <footer>© 2025 Family Health Tracker Concept · Built by parents, for parents · Privacy-first always</footer>
   </main>
 
   <script>
