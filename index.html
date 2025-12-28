@@ -42,26 +42,6 @@
       position:relative;
       overflow:hidden;
     }
-    .hero::before{
-      content:'';
-      position:absolute;
-      top:-50%;
-      right:-10%;
-      width:400px;
-      height:400px;
-      background:radial-gradient(circle, rgba(236,72,153,.15), transparent);
-      border-radius:50%;
-    }
-    .hero::after{
-      content:'';
-      position:absolute;
-      bottom:-30%;
-      left:-5%;
-      width:300px;
-      height:300px;
-      background:radial-gradient(circle, rgba(16,185,129,.15), transparent);
-      border-radius:50%;
-    }
     .hero-content{position:relative; z-index:1}
     .badge{
       display:inline-flex; 
@@ -90,16 +70,6 @@
       display:inline-block;
       position:relative;
     }
-    .handwritten::after{
-      content:'';
-      position:absolute;
-      bottom:-4px;
-      left:0;
-      right:0;
-      height:3px;
-      background:var(--secondary);
-      border-radius:2px;
-    }
     .sub{
       color:var(--muted); 
       font-size:clamp(16px,2.5vw,20px);
@@ -113,17 +83,6 @@
       text-align:center; 
       margin:60px 0 36px 0;
     }
-    .use-cases-header h2{
-      font-size:36px; 
-      margin:0 0 12px 0; 
-      color:var(--text);
-      font-weight:700;
-    }
-    .use-cases-header p{
-      color:var(--muted); 
-      font-size:18px; 
-      margin:0;
-    }
     .use-cases{
       display:grid; 
       gap:24px;
@@ -134,157 +93,13 @@
     }
     .use-case{
       background:var(--card); 
-      border:2px solid transparent;
       border-radius:20px; 
       padding:28px; 
-      display:grid; 
-      gap:20px;
       transition:all .3s ease;
       box-shadow:0 4px 16px rgba(0,0,0,.06);
     }
-    .use-case:hover{
-      transform:translateY(-6px);
-      box-shadow:0 12px 32px rgba(0,0,0,.12);
-    }
-    .use-case:nth-child(1){border-color:var(--primary-light)}
-    .use-case:nth-child(1):hover{border-color:var(--primary)}
-    .use-case:nth-child(2){border-color:var(--secondary-light)}
-    .use-case:nth-child(2):hover{border-color:var(--secondary)}
-    .use-case:nth-child(3){border-color:var(--accent-light)}
-    .use-case:nth-child(3):hover{border-color:var(--accent)}
-    .use-case:nth-child(4){border-color:var(--warm-light)}
-    .use-case:nth-child(4):hover{border-color:var(--warm)}
     
-    .use-case-visual{
-      border-radius:12px; 
-      padding:12px;
-      height:320px;
-      display:flex; 
-      align-items:center; 
-      justify-content:center;
-      position:relative;
-    }
-    .use-case:nth-child(1) .use-case-visual{background:linear-gradient(135deg, var(--primary-light), #ecfdf5)}
-    .use-case:nth-child(2) .use-case-visual{background:linear-gradient(135deg, var(--secondary-light), #fdf2f8)}
-    .use-case:nth-child(3) .use-case-visual{background:linear-gradient(135deg, var(--accent-light), #f5f3ff)}
-    .use-case:nth-child(4) .use-case-visual{background:linear-gradient(135deg, var(--warm-light), #fffbeb)}
-    
-    .mock-screen{
-      background:#ffffff; 
-      border-radius:12px; 
-      padding:16px;
-      border:2px solid rgba(30,41,59,.1);
-      box-shadow:0 8px 24px rgba(0,0,0,.12); 
-      width:100%;
-      height:100%;
-      max-width:320px;
-      max-height:296px;
-      overflow:hidden;
-    }
-    .mock-screen-header{
-      font-size:11px;
-      font-weight:600;
-      color:var(--muted);
-      margin-bottom:12px;
-      text-transform:uppercase;
-      letter-spacing:0.5px;
-    }
-    
-    .mock-row{
-      background:rgba(16,185,129,.08); 
-      padding:12px; 
-      border-radius:8px;
-      margin-bottom:10px; 
-      font-size:13px; 
-      border-left:4px solid var(--primary);
-    }
-    .use-case:nth-child(2) .mock-row{
-      background:rgba(236,72,153,.08);
-      border-left-color:var(--secondary);
-    }
-    
-    .mock-insight{
-      background:rgba(139,92,246,.08); 
-      padding:12px; 
-      border-radius:8px;
-      margin-bottom:10px; 
-      font-size:13px; 
-      border-left:4px solid var(--accent);
-    }
-    .use-case:nth-child(3) .mock-insight{
-      background:rgba(139,92,246,.08);
-      border-left-color:var(--accent);
-    }
-    .use-case:nth-child(4) .mock-insight{
-      background:rgba(16,185,129,.08);
-      border-left-color:var(--primary);
-    }
-    
-    .use-case h3{
-      margin:0; 
-      font-size:20px; 
-      color:var(--text);
-      font-weight:700;
-      text-align:center;
-    }
-    .use-case p{
-      margin:0; 
-      color:var(--muted); 
-      font-size:14px; 
-      line-height:1.6;
-      text-align:center;
-    }
-    
-    /* WHY SECTION */
-    .why-section{
-      margin-top:60px; 
-      display:grid; 
-      gap:20px;
-      grid-template-columns:1fr;
-    }
-    @media (min-width:600px){
-      .why-section{grid-template-columns:repeat(2,1fr)}
-    }
-    .why-card{
-      background:var(--card); 
-      border:2px solid transparent;
-      border-radius:16px; 
-      padding:28px;
-      box-shadow:0 4px 16px rgba(0,0,0,.06);
-      transition:all .3s ease;
-    }
-    .why-card:hover{
-      box-shadow:0 8px 24px rgba(0,0,0,.1);
-      transform:translateY(-3px);
-    }
-    .why-card:nth-child(1){border-color:var(--accent-light)}
-    .why-card:nth-child(1):hover{border-color:var(--accent)}
-    .why-card:nth-child(2){border-color:var(--primary-light)}
-    .why-card:nth-child(2):hover{border-color:var(--primary)}
-    .why-card:nth-child(3){border-color:var(--secondary-light)}
-    .why-card:nth-child(3):hover{border-color:var(--secondary)}
-    .why-card:nth-child(4){border-color:var(--warm-light)}
-    .why-card:nth-child(4):hover{border-color:var(--warm)}
-    
-    .why-card h3{
-      margin:0 0 16px 0; 
-      font-size:22px; 
-      display:flex; 
-      align-items:center; 
-      gap:12px; 
-      color:var(--text);
-      font-weight:700;
-    }
-    .why-card ul{
-      margin:8px 0 0 0; 
-      padding-left:22px; 
-      color:var(--muted); 
-      font-size:15px; 
-      line-height:1.8;
-    }
-    .why-card li{margin:10px 0}
-    
-    /* CTA */
+    /* CTA FORM */
     .cta-section{
       margin-top:60px; 
       background:linear-gradient(135deg, var(--secondary-light), var(--accent-light));
@@ -292,43 +107,13 @@
       border-radius:24px; 
       padding:50px 32px;
       text-align:center;
-      box-shadow:0 8px 32px rgba(236,72,153,.2);
-    }
-    .cta-section h2{
-      font-size:36px; 
-      margin:0 0 12px 0;
-      font-weight:700;
-      color:var(--text);
-    }
-    .cta-section p{
-      color:var(--muted); 
-      margin:0 0 32px 0; 
-      font-size:18px;
     }
     
-    .tiny{
-      font-size:13px; 
-      color:var(--muted);
-      margin-top:8px;
-    }
-    
-    .toast{
-      margin-top:14px; 
-      font-weight:600;
-      font-size:16px;
-    }
-    .ok{color:var(--primary)}
-    .err{color:#ef4444}
-    
-    .feedback-btn:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(0,0,0,.2);
-    }
-    
+    .feedback-btn:hover { transform: translateY(-4px); }
     .feedback-btn.selected {
       transform: scale(1.05);
-      box-shadow: 0 8px 32px rgba(0,0,0,.3);
       border-color: #000 !important;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
     }
     
     .btn{
@@ -337,21 +122,80 @@
       cursor:pointer; 
       font-weight:700;
       color:#ffffff;
-      transition:all .2s ease;
-      box-shadow:0 4px 16px rgba(236,72,153,.3);
-      font-size:18px;
       padding:16px 20px;
       border-radius:12px;
+      font-size:18px;
+      width: 100%;
     }
-    .btn:hover{
-      background:#db2777;
-      transform:translateY(-2px);
-      box-shadow:0 6px 20px rgba(236,72,153,.4);
-    }
-    .btn:disabled {
-        background: #ccc;
-        cursor: not-allowed;
-    }
+    .btn:disabled { background: #ccc; cursor: not-allowed; }
     
-    footer{
-      margin-top:50px;
+    .toast{ margin-top:14px; font-weight:600; }
+    .ok{color:var(--primary)}
+    .err{color:#ef4444}
+    
+    footer{ margin-top:50px; color:var(--muted); text-align:center; padding:20px; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-content">
+        <span class="badge">🌟 Help Us Build This Right</span>
+        <h1>Finally, <span class="handwritten">health insights</span> that actually help your family.</h1>
+        <p class="sub">Stop digging through texts and emails. Get everything organized in one place.</p>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <h2>Does This Sound Useful to You?</h2>
+      <p>Help us understand if we're building something you actually need.</p>
+      
+      <div style="max-width: 600px; margin: 0 auto;">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px;">
+          <button class="feedback-btn" data-feedback="yes" style="background: var(--primary); color: white; border: 3px solid var(--primary); padding: 24px 16px; border-radius: 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <span style="font-size: 48px;">👍</span>
+            <span>Yes, I need this!</span>
+          </button>
+          <button class="feedback-btn" data-feedback="maybe" style="background: var(--warm); color: white; border: 3px solid var(--warm); padding: 24px 16px; border-radius: 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <span style="font-size: 48px;">🤷</span>
+            <span>Maybe</span>
+          </button>
+          <button class="feedback-btn" data-feedback="no" style="background: var(--muted); color: white; border: 3px solid var(--muted); padding: 24px 16px; border-radius: 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <span style="font-size: 48px;">👎</span>
+            <span>Not for me</span>
+          </button>
+        </div>
+        
+        <div id="feedbackForm" style="display: none;">
+          <input id="email" type="email" placeholder="Your email (optional)" style="width: 100%; padding: 16px 20px; border-radius: 12px; border: 2px solid rgba(30,41,59,.2); margin-bottom: 14px;" />
+          <textarea id="comments" placeholder="Any thoughts you'd like to share? (optional)" rows="3" style="width: 100%; padding: 16px 20px; border-radius: 12px; border: 2px solid rgba(30,41,59,.2); margin-bottom: 14px;"></textarea>
+          <button id="submitBtn" class="btn">Submit Feedback</button>
+          <div id="toast" class="toast"></div>
+        </div>
+      </div>
+    </section>
+
+    <footer>© 2025 Family Health Tracker Concept</footer>
+  </main>
+
+  <script>
+    // Updated with your NEW Web App URL
+    const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbz5vqel1lxCGxjHDyW2XJfbHAHqLU-Q-JjXrUGulgoK1f86ERIhzw2An-3z7mY799dJ/exec";
+    
+    let selectedFeedback = null;
+    const feedbackBtns = document.querySelectorAll('.feedback-btn');
+    const feedbackForm = document.getElementById('feedbackForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const toast = document.getElementById('toast');
+    
+    feedbackBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        selectedFeedback = btn.dataset.feedback;
+        feedbackBtns.forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        feedbackForm.style.display = 'block';
+      });
+    });
+    
+    submitBtn.addEventListener('click', async () => {
+      if
