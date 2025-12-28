@@ -338,6 +338,96 @@
       transform:translateY(0);
     }
     
+    /* STICKY FEEDBACK BAR */
+    .sticky-feedback {
+      position: fixed;
+      bottom: -100px;
+      left: 0;
+      right: 0;
+      background: var(--card);
+      border-top: 2px solid var(--primary-light);
+      padding: 12px 20px;
+      box-shadow: 0 -4px 20px rgba(0,0,0,.1);
+      transition: bottom 0.3s ease;
+      z-index: 1000;
+      display: none;
+    }
+    .sticky-feedback.show {
+      bottom: 0;
+      display: block;
+    }
+    .sticky-feedback.hidden {
+      display: none !important;
+    }
+    .sticky-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .sticky-text {
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--text);
+    }
+    .sticky-buttons {
+      display: flex;
+      gap: 12px;
+    }
+    .sticky-btn {
+      background: var(--card);
+      border: 2px solid;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .sticky-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,.15);
+    }
+    .sticky-btn.yes {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .sticky-btn.yes:hover {
+      background: var(--primary);
+      color: white;
+    }
+    .sticky-btn.maybe {
+      border-color: var(--warm);
+      color: var(--warm);
+    }
+    .sticky-btn.maybe:hover {
+      background: var(--warm);
+      color: white;
+    }
+    .sticky-btn.no {
+      border-color: var(--muted);
+      color: var(--muted);
+    }
+    .sticky-btn.no:hover {
+      background: var(--muted);
+      color: white;
+    }
+    @media (max-width: 600px) {
+      .sticky-content {
+        font-size: 14px;
+      }
+      .sticky-btn {
+        padding: 6px 12px;
+        font-size: 13px;
+      }
+    }
+    
     footer{
       margin-top:50px; 
       color:var(--muted); 
@@ -357,6 +447,24 @@
   </style>
 </head>
 <body>
+  <!-- Sticky Feedback Bar -->
+  <div class="sticky-feedback" id="stickyFeedback">
+    <div class="sticky-content">
+      <span class="sticky-text">Does your family need this?</span>
+      <div class="sticky-buttons">
+        <button class="sticky-btn yes" onclick="handleStickyFeedback('yes')">
+          <span>👍</span> Yes, we need this
+        </button>
+        <button class="sticky-btn maybe" onclick="handleStickyFeedback('maybe')">
+          <span>🤔</span> Maybe
+        </button>
+        <button class="sticky-btn no" onclick="handleStickyFeedback('no')">
+          <span>👎</span> Not for us
+        </button>
+      </div>
+    </div>
+  </div>
+
   <main class="wrap">
     <section class="hero">
       <div class="hero-content">
@@ -631,6 +739,7 @@
     const feedbackForm = document.getElementById('feedbackForm');
     const submitBtn = document.getElementById('submitBtn');
     const toast = document.getElementById('toast');
+    const stickyFeedback = document.getElementById('stickyFeedback');
     
     let selectedFeedback = null;
 
@@ -639,8 +748,40 @@
         if (localStorage.getItem('formSubmitted_HealthTracker') === 'true') {
             surveyWrap.style.display = 'none';
             successMessage.style.display = 'block';
+            stickyFeedback.classList.add('hidden');
         }
     };
+
+    // SHOW STICKY BAR AFTER SCROLLING PAST HERO
+    window.addEventListener('scroll', () => {
+        if (localStorage.getItem('formSubmitted_HealthTracker') === 'true') {
+            return;
+        }
+        const heroHeight = document.querySelector('.hero').offsetHeight + 100;
+        if (window.scrollY > heroHeight) {
+            stickyFeedback.classList.add('show');
+        } else {
+            stickyFeedback.classList.remove('show');
+        }
+    });
+
+    // HANDLE STICKY BAR CLICKS
+    function handleStickyFeedback(feedback) {
+        selectedFeedback = feedback;
+        
+        // Update main form buttons to match selection
+        feedbackBtns.forEach(btn => {
+            if (btn.dataset.feedback === feedback) {
+                btn.classList.add('selected');
+            } else {
+                btn.classList.remove('selected');
+            }
+        });
+        
+        // Show form and scroll to it
+        feedbackForm.style.display = 'block';
+        document.getElementById('surveyWrap').scrollIntoView({ behavior: 'smooth' });
+    }
 
     function showToast(msg, ok=true){
       toast.textContent = msg;
@@ -692,6 +833,9 @@
         
         // PERSIST THE SUCCESS STATE
         localStorage.setItem('formSubmitted_HealthTracker', 'true');
+        
+        // HIDE STICKY BAR
+        stickyFeedback.classList.add('hidden');
         
         // SWAP UI
         surveyWrap.style.display = 'none';
